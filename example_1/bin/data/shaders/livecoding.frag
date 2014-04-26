@@ -1,0 +1,8 @@
+#version 120
+
+void main( void )
+{
+	//gl_FragCoord
+    
+    gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+}
