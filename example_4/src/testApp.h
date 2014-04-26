@@ -34,6 +34,7 @@ public:
     
     //image
     ofImage image;
+    ofVideoGrabber grabber;
 		
     //shader
     ofxAutoReloadedShader autoShader;

@@ -23,11 +23,15 @@ void testApp::setup(){
     
     //3d
     cam.setDistance(500);
-    plane.set(200, 300, 10, 20);
+    plane.set(200, 300, 50, 75);
+//    plane.mapTexCoords(0, 0, 320, 240);
     plane.mapTexCoordsFromTexture(image.getTextureReference());
     sphere.set(150, 20);
+    sphere.mapTexCoordsFromTexture(image.getTextureReference());
     cylinder.set(100, 300, 20, 40);
+    cylinder.mapTexCoordsFromTexture(image.getTextureReference());
     cone.set(100, 300);
+    cone.mapTexCoordsFromTexture(image.getTextureReference());
 //    icosphere.set(10, 10);
     
     currentPrimitive = 0;
@@ -45,7 +49,8 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    
+    ofEnableDepthTest();
+    cam.begin();
     autoShader.begin();
     autoShader.setUniformTexture("tex0", image.getTextureReference(), 0);
     autoShader.setUniform1f("time", ofGetElapsedTimef());
@@ -53,7 +58,7 @@ void testApp::draw(){
     autoShader.setUniform2f("mousePos", mouseX, mouseY);
     autoShader.setUniform1f("vol", scaledVol);
     
-    cam.begin();
+    
     switch (currentPrimitive) {
         case 0:
             drawWireframe ? plane.drawWireframe() : plane.draw();
@@ -71,10 +76,11 @@ void testApp::draw(){
             drawWireframe ? cone.drawWireframe() : cone.draw();
             break;
     }
-    cam.end();
+    
     
     autoShader.end();
-    
+    cam.end();
+    ofDisableDepthTest();
     
     ofSetWindowTitle("FPS: " + ofToString(ofGetFrameRate()));
 }

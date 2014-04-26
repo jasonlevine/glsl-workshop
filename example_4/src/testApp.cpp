@@ -20,6 +20,7 @@ void testApp::setup(){
     
     //image
     image.loadImage("images/crab-nebula_wallpapers.jpg");
+    grabber.initGrabber(320, 240);
     
     //shader
 	autoShader.load("shaders/livecoding");
@@ -29,17 +30,33 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
     scaledVol = ofMap(smoothedVol, 0.0, 0.17, 0.0, 1.0, true);
+    grabber.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+//    ofFbo fbo;
+//    fbo.allocate(1024, 768);
+//    
+//    
+//    fbo.begin();
+//    ofClear(0);
+//    ofSetColor(255);
+//    ofCircle(ofGetWidth()/2 + sin(ofGetElapsedTimef()) * 100, ofGetHeight()/2, 25);
+//    fbo.end();
+//    fbo.draw(0,0);
+    
+    
+    
 
     autoShader.begin();
     autoShader.setUniform1f("time", ofGetElapsedTimef());
     autoShader.setUniform2f("windowSize", ofGetWidth(), ofGetHeight());
     autoShader.setUniform2f("mousePos", mouseX, mouseY);
     autoShader.setUniform1f("vol", scaledVol);
-    image.draw(0,0);
+//    fbo.draw(0,0);
+//    image.draw(0,0);
+    grabber.draw(0,0, 1024, 768);
     autoShader.end();
     
     

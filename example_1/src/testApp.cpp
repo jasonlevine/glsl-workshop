@@ -6,7 +6,7 @@ void testApp::setup(){
     ofEnableAlphaBlending();
 
 	autoShader.load("shaders/livecoding");
-    autoShader.setMillisBetweenFileCheck(16);
+    autoShader.setMillisBetweenFileCheck(250);
 }
 
 //--------------------------------------------------------------
